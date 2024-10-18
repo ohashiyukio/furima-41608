@@ -6,7 +6,7 @@
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | nickname           | string | null: false |
-| e-mail             | string | null: false |
+| e_mail             | string | null: false |
 | encrypted_password | string | null: false |
 | last_name          | text   | null: false | 
 | first_name         | text   | null: false |
@@ -28,7 +28,7 @@
 | price            | integer    | null: false                     |
 | user             | references | null: false, foreign_key: true  |
 
-## buyers_records テーブル
+## buyer_records テーブル
 | Column    | Type       | Options                         |
 | ------    | ---------- | ------------------------------- |
 | user      | references | null: false, foreign_key: true  |
@@ -38,7 +38,7 @@
 ## addresses テーブル
 | Column       | Type       | Options                         |
 | ------       | ---------- | ------------------------------- |
-| post_no      | string     |                                 |
+| post_no      | string     | null: false                     |
 | dep_place_id | integer    | null: false                     |
 | city         | string     | null: false                     |
 | city_no      | string     | null: false                     |
