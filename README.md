@@ -1,24 +1,47 @@
 # README
+# テーブル設計　sample
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| e-mail             | string | null: false |
+| encrypted_password | string | null: false |
+| last_name          | text   | null: false | 
+| first_name         | text   | null: false |
+| last_name_kana     | text   | null: false |
+| first_name_kana    | text   | null: false |
+| birthday           | date   | null: false |
 
-* Ruby version
+## items テーブル
+ 
+| Column           | Type       | Options                         |
+| ---------------- | ---------- | ------------------------------ |
+| name             | string     | null: false                     |
+| exp              | text       | null: false                     |
+| category_id      | integer    | null: false                     |
+| situation_id     | integer    | null: false                     |
+| freight_id       | integer    | null: false                     |
+| dep_place_id     | integer    | null: false                     |
+| schedule_date_id | integer    | null: false                     |
+| price            | integer    | null: false                     |
+| user             | references | null: false, foreign_key: true  |
 
-* System dependencies
+## buyers_records テーブル
+| Column    | Type       | Options                         |
+| ------    | ---------- | ------------------------------- |
+| user      | references | null: false, foreign_key: true  |
+| item      | references | null: false, foreign_key: true  |
 
-* Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## addresses テーブル
+| Column       | Type       | Options                         |
+| ------       | ---------- | ------------------------------- |
+| post_no      | string     |                                 |
+| dep_place_id | integer    | null: false                     |
+| city         | string     | null: false                     |
+| city_no      | string     | null: false                     |
+| building     | string     |                                 |
+| phone_no     | string     | null: false                     |
+| buyer_record | references | null: false, foreign_key: true  |
