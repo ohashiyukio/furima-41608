@@ -3,21 +3,21 @@
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| e_mail             | string | null: false |
-| encrypted_password | string | null: false |
-| last_name          | text   | null: false | 
-| first_name         | text   | null: false |
-| last_name_kana     | text   | null: false |
-| first_name_kana    | text   | null: false |
-| birthday           | date   | null: false |
+| Column             | Type   | Options                  |
+| ------------------ | ------ | ------------------------ |
+| nickname           | string | null: false              |
+| email              | string | null: false, unique:true |
+| encrypted_password | string | null: false              |
+| last_name          | string | null: false              | 
+| first_name         | string | null: false              |
+| last_name_kana     | string | null: false              |
+| first_name_kana    | string | null: false              |
+| birthday           | date   | null: false              |
 
 ## items テーブル
  
 | Column           | Type       | Options                         |
-| ---------------- | ---------- | ------------------------------ |
+| ---------------- | ---------- | ------------------------------- |
 | name             | string     | null: false                     |
 | exp              | text       | null: false                     |
 | category_id      | integer    | null: false                     |
