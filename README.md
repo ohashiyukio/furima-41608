@@ -16,8 +16,8 @@
 
 ### Association
 - has_many :items
-- belongs to :address
-- has_many :buyer_record
+
+- has_many :buyer_records
 
 ## items テーブル
  
@@ -36,7 +36,7 @@
 ### Association
 - has_one :buyer_record
 - belongs_to :user
-- has_one :addresses
+
 
 ## buyer_records テーブル
 | Column    | Type       | Options                         |
@@ -46,7 +46,7 @@
 
 ### Association
 - belongs_to :item
-- has_one :addresses
+- has_one :address
 - belongs_to :user
 
 
@@ -63,5 +63,4 @@
 
 ### Association
 - belongs_to :buyer_record
-- belongs_to :items
-- has_one :user
+
