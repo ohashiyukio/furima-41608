@@ -1,5 +1,5 @@
 # README
-# テーブル設計　sample
+# テーブル設計
 
 ## users テーブル
 
@@ -13,6 +13,11 @@
 | last_name_kana     | string | null: false              |
 | first_name_kana    | string | null: false              |
 | birthday           | date   | null: false              |
+
+### Association
+- has_many :items
+- belongs to :address
+- has_many :buyer_record
 
 ## items テーブル
  
@@ -28,11 +33,21 @@
 | price            | integer    | null: false                     |
 | user             | references | null: false, foreign_key: true  |
 
+### Association
+- has_one :buyer_record
+- belongs_to :user
+- has_one :addresses
+
 ## buyer_records テーブル
 | Column    | Type       | Options                         |
 | ------    | ---------- | ------------------------------- |
 | user      | references | null: false, foreign_key: true  |
 | item      | references | null: false, foreign_key: true  |
+
+### Association
+- belongs_to :item
+- has_one :addresses
+- belongs_to :user
 
 
 ## addresses テーブル
@@ -45,3 +60,8 @@
 | building     | string     |                                 |
 | phone_no     | string     | null: false                     |
 | buyer_record | references | null: false, foreign_key: true  |
+
+### Association
+- belongs_to :buyer_record
+- belongs_to :items
+- has_one :user

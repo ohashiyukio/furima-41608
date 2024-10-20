@@ -1,5 +1,4 @@
 class User < ApplicationRecord
  has_many :items
- belonds to :address
- has_many :buyer_record
+ belongs to :address
 end
