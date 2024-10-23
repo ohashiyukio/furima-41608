@@ -2,10 +2,9 @@ class Item < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
-
-  extend ActiveHash::Associations::ActiveRecordExtensions 
+  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
-  #has_one :buyer_record
+  # has_one :buyer_record
   has_one_attached :image
 
   belongs_to :category
@@ -13,8 +12,7 @@ class Item < ApplicationRecord
   belongs_to :freight
   belongs_to :dep_place
   belongs_to :schedule_date
-  
-  
+
   validates :image, presence: true
   validates :name, presence: true
   validates :exp, presence: true
@@ -26,6 +24,4 @@ class Item < ApplicationRecord
   validates :price, presence: true,
                     numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
                     format: { with: /\A[0-9]+\z/, message: 'must be entered as half-width numbers' }
-
-
-                  end
+end
