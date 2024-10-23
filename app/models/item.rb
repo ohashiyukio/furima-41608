@@ -25,7 +25,7 @@ class Item < ApplicationRecord
   validates :schedule_date_id, presence: true, numericality: { other_than: 1 }
   validates :price, presence: true,
                     numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
-                    format: { with: /\A[0-9]+\z/, message: 'は半角数字で入力してください' }
+                    format: { with: /\A[0-9]+\z/, message: 'must be entered as half-width numbers' }
 
 
                   end
