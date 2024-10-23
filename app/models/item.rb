@@ -14,7 +14,7 @@ class Item < ApplicationRecord
   belongs_to :dep_place
   belongs_to :schedule_date
   
-  validates :user, presence: true
+  
   validates :image, presence: true
   validates :name, presence: true
   validates :exp, presence: true
@@ -27,11 +27,5 @@ class Item < ApplicationRecord
                     numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
                     format: { with: /\A[0-9]+\z/, message: 'は半角数字で入力してください' }
 
-                    def sales_fee
-                      (price * 0.1).floor # 販売手数料は10%で計算し、小数点以下は切り捨て
-                    end
-                  
-                    def sales_profit
-                      (price - sales_fee).floor # 販売利益は価格から手数料を引いた金額で、小数点以下は切り捨て
-                    end
+
                   end
