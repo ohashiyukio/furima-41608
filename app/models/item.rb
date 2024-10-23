@@ -22,7 +22,11 @@ class Item < ApplicationRecord
   validates :dep_place_id, presence: true, numericality: { other_than: 1 }
   validates :schedule_date_id, presence: true, numericality: { other_than: 1 }
   validates :price, presence: true,
-                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, 
-                    only_integer: true, message: 'must be entered as half-width numbers' }
+                numericality: {
+                  greater_than_or_equal_to: 300,
+                  less_than_or_equal_to: 9999999,
+                  only_integer: true
+                },
+                format: { with: /\A\d+\z/, message: 'must be entered as whole numbers' }
 end
 
