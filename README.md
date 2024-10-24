@@ -18,6 +18,8 @@
 - has_many :items
 - has_many :buyer_records
 
+
+
 ## items テーブル
  
 | Column           | Type       | Options                         |
@@ -35,8 +37,6 @@
 ### Association
 - has_one :buyer_record
 - belongs_to :user
-
-
 ## buyer_records テーブル
 | Column    | Type       | Options                         |
 | ------    | ---------- | ------------------------------- |
