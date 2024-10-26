@@ -24,7 +24,7 @@
       </span>
     </div>
   </div>
-</div>
+<%# </div> %>
 
     <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分ける %>
   <% if user_signed_in? %>   
@@ -41,7 +41,7 @@
     <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分ける %>
 
     <div class="item-explain-box">
-      <span><%= "商品説明" %></span>
+      <span><%= @item.exp %></span>
     </div>
     <table class="detail-table">
       <tbody>
@@ -81,7 +81,7 @@
         <span>不適切な商品の通報</span>
       </div>
     </div>
-  </div>
+  
   <%# /商品の概要 %>
 
   <div class="comment-box">
@@ -107,8 +107,10 @@
     </a>
   </div>
   <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href="#" class="another-item"><%= "商品のカテゴリー名" %>をもっと見る</a>
+  <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
   <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-</div>
+
+
 
 <%= render "shared/footer" %>
+

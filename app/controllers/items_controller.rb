@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit] # ログイン必須アクション
+  before_action :authenticate_user!, only: [:new, :create, ] # ログイン必須アクション
 
   def index
     @items = Item.order(created_at: :desc)
@@ -18,8 +18,8 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  # def edit
+  # end
 
   def show
     @item = Item.find(params[:id])
