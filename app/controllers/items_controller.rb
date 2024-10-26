@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, ] # ログイン必須アクション
+  before_action :authenticate_user!, only: [:new, :create] # ログイン必須アクション
+  before_action :move_to_index, except: [:index, :show]
 
   def index
     @items = Item.order(created_at: :desc)
@@ -29,10 +30,10 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
-    redirect_to item_path(@item) # 商品詳細ページにリダイレクト
-  else
-    render :edit, status: :unprocessable_entity # 更新に失敗した場合は編集ページを再表示
-  end 
+      redirect_to item_path(@item) # 商品詳細ページにリダイレクト
+    else
+      render :edit, status: :unprocessable_entity # 更新に失敗した場合は編集ページを再表示
+    end
   end
 
   private
@@ -40,5 +41,11 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :exp, :category_id, :situation_id, :freight_id, :dep_place_id, :schedule_date_id, :price,
                                  :image).merge(user_id: current_user.id)
+  end
+
+  def move_to_index
+    return if user_signed_in?
+
+    redirect_to action: :index
   end
 end
