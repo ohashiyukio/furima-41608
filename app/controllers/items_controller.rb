@@ -18,11 +18,21 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def edit
-  # end
+  def edit
+    @item = Item.find(params[:id])
+  end
 
   def show
     @item = Item.find(params[:id])
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+    redirect_to item_path(@item) # 商品詳細ページにリダイレクト
+  else
+    render :edit, status: :unprocessable_entity # 更新に失敗した場合は編集ページを再表示
+  end 
   end
 
   private
