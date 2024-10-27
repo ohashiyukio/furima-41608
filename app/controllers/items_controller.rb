@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create] # ログイン必須アクション
-  before_action :move_to_index, except: [:index, :show]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update] # ログイン必須アクション
+  before_action :move_to_index, only: [:update, :edit]
 
   def index
     @items = Item.order(created_at: :desc)
@@ -44,8 +44,8 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    return if user_signed_in?
-
+    unless current_user == @item_user
     redirect_to action: :index
   end
 end
+  end
