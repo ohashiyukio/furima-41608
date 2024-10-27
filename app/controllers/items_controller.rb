@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update, :destroy ] # 未ログインユーザーはログインページにリダイレクト
-  before_action :set_item, only: [:edit, :update, :show]
-  before_action :move_to_index, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy] # 未ログインユーザーはログインページにリダイレクト
+  before_action :set_item, only: [:edit, :update, :show, :destroy]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.order(created_at: :desc)
@@ -53,7 +53,6 @@ class ItemsController < ApplicationController
 
   def move_to_index
     # ログイン済みでも出品者でない場合はトップページにリダイレクト
-    redirect_to root_path, unless current_user == @item.user
-                           end
+    redirect_to root_path unless current_user == @item.user
   end
 end
