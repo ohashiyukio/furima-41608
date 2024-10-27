@@ -5,6 +5,6 @@ root to:"items#index"
   # Defines the root path route ("/")
   # root "articles#index"
   devise_for :users
-  resources :items, only: [:index, :new, :create, :show, :edit]
+  resources :items, only: [:index, :new, :create, :show, :edit, :update]
 end
 

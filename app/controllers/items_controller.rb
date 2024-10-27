@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, ] # ログイン必須アクション
+  before_action :authenticate_user!, only: [:edit, :update]  # 未ログインユーザーはログインページにリダイレクト
+  before_action :set_item, only: [:edit, :update, :show]
+  before_action :move_to_index, only: [:edit, :update]
 
   def index
     @items = Item.order(created_at: :desc)
@@ -18,17 +20,32 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def edit
-  # end
+  def edit
+  end
 
   def show
-    @item = Item.find(params[:id])
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item), notice: '商品情報を更新しました' # 商品詳細ページにリダイレクト
+    else
+      render :edit, status: :unprocessable_entity # 更新に失敗した場合は編集ページを再表示
+    end
   end
 
   private
 
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
   def item_params
-    params.require(:item).permit(:name, :exp, :category_id, :situation_id, :freight_id, :dep_place_id, :schedule_date_id, :price,
-                                 :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :exp, :category_id, :situation_id, :freight_id, :dep_place_id, :schedule_date_id, :price, :image).merge(user_id: current_user.id)
+  end
+
+  def move_to_index
+    # ログイン済みでも出品者でない場合はトップページにリダイレクト
+    redirect_to root_path, unless current_user == @item.user
   end
 end
