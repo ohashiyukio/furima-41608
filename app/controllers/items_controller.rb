@@ -46,6 +46,6 @@ class ItemsController < ApplicationController
 
   def move_to_index
     # ログイン済みでも出品者でない場合はトップページにリダイレクト
-    redirect_to root_path, alert: '不正なアクセスです' unless current_user == @item.user
+    redirect_to root_path, unless current_user == @item.user
   end
 end
