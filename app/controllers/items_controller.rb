@@ -11,14 +11,14 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
-  def create
-    @item = Item.new(item_params)
-    if @item.save
-      redirect_to root_path, notice: '商品を出品しました'
-    else
-      render :new, status: :unprocessable_entity
-    end
-  end
+  # def create
+  #   @item = Item.new(item_params)
+  #   if @item.save
+  #     redirect_to root_path, notice: '商品を出品しました'
+  #   else
+  #     render :new, status: :unprocessable_entity
+  #   end
+  # end
 
   def edit
   end
@@ -26,13 +26,13 @@ class ItemsController < ApplicationController
   def show
   end
 
-  def update
-    if @item.update(item_params)
-      redirect_to item_path(@item), notice: '商品情報を更新しました' # 商品詳細ページにリダイレクト
-    else
-      render :edit, status: :unprocessable_entity # 更新に失敗した場合は編集ページを再表示
-    end
-  end
+  # def update
+  #   if @item.update(item_params)
+  #     redirect_to item_path(@item), notice: '商品情報を更新しました' # 商品詳細ページにリダイレクト
+  #   else
+  #     render :edit, status: :unprocessable_entity # 更新に失敗した場合は編集ページを再表示
+  #   end
+  # end
 
   def destroy
     item = Item.find(params[:id])
