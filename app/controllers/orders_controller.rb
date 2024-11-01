@@ -34,9 +34,9 @@ class OrdersController < ApplicationController
 
   def move_to_index
     # ログイン済みでも出品者と購入者が同じの場合はトップページにリダイレクト
-    if current_user == @item.user || @item.order.present?
-           redirect_to root_path 
-    end
+    return unless current_user == @item.user || @item.order.present?
+
+    redirect_to root_path
   end
 
   def pay_item
@@ -48,4 +48,3 @@ class OrdersController < ApplicationController
     )
   end
 end
-

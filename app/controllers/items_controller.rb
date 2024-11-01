@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
 
   def show
   end
- 
+
   def destroy
     item = Item.find(params[:id])
     item.destroy
@@ -36,8 +36,8 @@ class ItemsController < ApplicationController
 
   def move_to_index
     # ログイン済みでも出品者でない場合はトップページにリダイレクト
-      if current_user == @item.user || @item.order.present?
-      redirect_to root_path 
+    return unless current_user == @item.user || @item.order.present?
+
+    redirect_to root_path
   end
-end
 end
