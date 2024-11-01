@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:index, :create] 
   before_action :set_item, only: [:index, :create]
   before_action :move_to_index, only: [:index, :create] # 購入ページへの遷移を制限
 
@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
 
   def move_to_index
     # ログイン済みでも出品者と購入者が同じの場合はトップページにリダイレクト
-    return unless current_user == @item.user || @item.order.present?
+    if current_user == @item.user || @item.order.present?
     redirect_to root_path
   end
 
@@ -46,4 +46,5 @@ class OrdersController < ApplicationController
       currency: 'jpy' # 通貨の種類（日本円）
     )
   end
+end
 end
