@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
   before_action :move_to_index, only: [:index, :create] # 購入ページへの遷移を制限
 
@@ -35,7 +35,6 @@ class OrdersController < ApplicationController
   def move_to_index
     # ログイン済みでも出品者と購入者が同じの場合はトップページにリダイレクト
     return unless current_user == @item.user || @item.order.present?
-
     redirect_to root_path
   end
 
