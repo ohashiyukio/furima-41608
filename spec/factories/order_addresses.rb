@@ -6,8 +6,8 @@ FactoryBot.define do
     city_no { '1-1-1' }
     building { 'ビル101' }
     phone_no { '09012345678' }
-
-    association :user
-    association :item
+    token {'sample_token' }
+  
+    
   end
 end

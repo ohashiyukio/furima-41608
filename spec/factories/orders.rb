@@ -6,5 +6,7 @@ FactoryBot.define do
     email { 'test@example' }
     password { 'test1234' }
     password_confirmation { password }
+    price {3000}
+    token {"tok_abcdefghijk00000000000000000"}
   end
 end
