@@ -14,7 +14,6 @@ class OrderAddress
     validates :city_no, presence: { message: "can't be blank" }
     validates :phone_no, presence: { message: "can't be blank" },
                          format: { with: /\A\d{10,11}\z/, message: 'is invalid. Input only number' }
-                  
   end
 
   # 保存メソッド

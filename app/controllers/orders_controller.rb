@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   before_action :move_to_index, only: [:index, :create] # 購入ページへの遷移を制限
 
   def index
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @order_address = OrderAddress.new
   end
 
@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
       @order_address.save
       redirect_to root_path
     else
-      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+      gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       render :index, status: :unprocessable_entity
     end
   end
@@ -34,17 +34,18 @@ class OrdersController < ApplicationController
 
   def move_to_index
     # ログイン済みでも出品者と購入者が同じの場合はトップページにリダイレクト
-    redirect_to root_path if current_user == @item.user
+    if current_user == @item.user || @item.order.present?
+           redirect_to root_path 
+    end
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-      amount: @item.price,  # 商品の値段
-      card: order_params[:token],    # カードトークン
-      currency: 'jpy'                 # 通貨の種類（日本円）
+      amount: @item.price, # 商品の値段
+      card: order_params[:token], # カードトークン
+      currency: 'jpy' # 通貨の種類（日本円）
     )
   end
-
-
 end
+

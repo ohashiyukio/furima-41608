@@ -128,17 +128,17 @@
     </div>
     <ul class='item-lists'>
 
- <% if @items.present? %>  <!-- 商品がある場合 -->   
+<% if @items.present? %>  <!-- 商品がある場合 -->   
 <% @items.each do |item| %>
-   <li class='list'>
+<li class='list'>
     <%= link_to item_path(item.id) do %>
 <div class='item-img-content'>
-      <%= image_tag item.image, class: 'item-img' %>
- <% if item.order.present? %>
+    <%= image_tag item.image, class: 'item-img' %>
+<% if item.order.present? %>
           <div class='sold-out'> <!-- sold outの表示 -->   
             <span>Sold Out!!</span> 
           </div>
-              <% end %>
+<% end %>
 </div>
 <div class="item-info">
   <h3 class='item-name'>
