@@ -27,6 +27,14 @@ class ItemsController < ApplicationController
   def show
   end
 
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item), notice: '商品情報を更新しました' # 商品詳細ページにリダイレクト
+    else
+      render :edit, status: :unprocessable_entity # 更新に失敗した場合は編集ページを再表示
+    end
+  end
+
   def destroy
     item = Item.find(params[:id])
     item.destroy
@@ -46,8 +54,7 @@ class ItemsController < ApplicationController
 
   def move_to_index
     # ログイン済みでも出品者でない場合はトップページにリダイレクト
-    return unless current_user == @item.user || @item.order.present?
-
+    return unless current_user != @item.user && @item.order.present?
     redirect_to root_path
   end
 end
