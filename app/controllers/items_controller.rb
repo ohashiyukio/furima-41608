@@ -54,7 +54,8 @@ class ItemsController < ApplicationController
 
   def move_to_index
     # ログイン済みでも出品者でない場合はトップページにリダイレクト
-    return unless current_user == @item.user || @item.order.present?
+    if current_user != @item.user || @item.order.present?
     redirect_to root_path
   end
+end
 end
