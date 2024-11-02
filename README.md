@@ -16,7 +16,7 @@
 
 ### Association
 - has_many :items
-- has_many :buyer_records
+- has_many :order
 
 
 
@@ -35,9 +35,9 @@
 | user             | references | null: false, foreign_key: true  |
 
 ### Association
-- has_one :buyer_record
+- has_one :order
 - belongs_to :user
-## buyer_records テーブル
+## orders テーブル
 | Column    | Type       | Options                         |
 | ------    | ---------- | ------------------------------- |
 | user      | references | null: false, foreign_key: true  |
@@ -57,8 +57,8 @@
 | city_no      | string     | null: false                     |
 | building     | string     |                                 |
 | phone_no     | string     | null: false                     |
-| buyer_record | references | null: false, foreign_key: true  |
+| order        | references | null: false, foreign_key: true  |
 
 ### Association
-- belongs_to :buyer_record
+- belongs_to :order
 

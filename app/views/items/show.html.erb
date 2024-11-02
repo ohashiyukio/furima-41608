@@ -9,11 +9,11 @@
      <div class="item-img-content">
       <%= image_tag url_for(@item.image), class: "item-box-img" %>
       <%# 商品が売れている場合は、sold outを表示%>
-      <%# <% if @item.sold_out? %>  <!-- sold_outの条件があればこれ --> 
+      <% if @item.order.present? %>   
         <div class="sold-out"> 
           <span>Sold Out!!</span>
         </div>
-      <%# <% end %>  
+      <% end %>  
       </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -23,20 +23,24 @@
         <%= @item.freight.name %>  <%# 配送料負担を表示 %>
       </span>
     </div>
-  </div>
-<%# </div> %>
+  
+
 
     <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分ける %>
   <% if user_signed_in? %>   
-  <% if current_user == @item.user %> <%#&& !@item.sold_out?%>  
+  <% if current_user == @item.user %> 
+  <% unless @item.order.present? %>  <%# 商品が売れていない場合 %>
     <%= link_to "商品の編集", edit_item_path , method: :get, class: "item-red-btn" %> 
     <p class="or-text">or</p>
-    <%= link_to "削除", item_path, data: {turbo_method: :delete}, class:"item-destroy" %> 
+      <%= link_to "削除", item_path, data: {turbo_method: :delete}, class:"item-destroy" %> 
+  <% end %> 
   <% else %> 
     <%# 商品が売れていない場合はこちらを表示 %>
-     <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%> 
+    <% unless @item.order.present? %>
+     <%= link_to "購入画面に進む", item_orders_path(@item), data: { turbo: false }, class:"item-red-btn"%>
     <%# //商品が売れていない場合はこちらを表示 %>
- <% end %> 
+    <% end %>
+  <% end %> 
  <% end %> 
     <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分ける %>
 
@@ -71,7 +75,7 @@
         </tr>
       </tbody>
     </table>
-    
+
     <div class="option">
       <div class="favorite-btn">
         <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
@@ -82,7 +86,7 @@
         <span>不適切な商品の通報</span>
       </div>
     </div>
-
+</div>
   <%# /商品の概要 %>
 
   <div class="comment-box">
@@ -110,8 +114,7 @@
 
   <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
 
-
-
+</div>
 
 <%= render "shared/footer" %>
 

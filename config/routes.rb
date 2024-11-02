@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  #get 'items/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-root to:"items#index"
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root to:"items#index"
   devise_for :users
-  resources :items
+  resources :items do
+  resources :orders, only: [:index, :create]
+
+  end
 end
+
+
 
