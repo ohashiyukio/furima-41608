@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update, :destroy] # 未ログインユーザーはログインページにリダイレクト
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :new] # 未ログインユーザーはログインページにリダイレクト
   before_action :set_item, only: [:edit, :update, :show, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
 
